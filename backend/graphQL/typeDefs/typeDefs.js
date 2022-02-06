@@ -7,10 +7,19 @@ const typeDefs = gql`
     apellido: String!
     active: Boolean!
   }
+  type Perro {
+    id: Int!
+    nombre: String!
+    raza: String!
+    active: Boolean!
+    Persona: Persona
+  }
 
   type Query {
     getPersonas: [Persona]
     getPersona(id: Int): Persona
+    getPerros: [Perro]
+    getPerro(id: Int): Perro
   }
 
   type Mutation {
@@ -21,6 +30,18 @@ const typeDefs = gql`
       apellido: String!
       active: Boolean
     ): Persona!
+    createPerro(
+      nombre: String!
+      raza: String!
+      active: Boolean!
+      PersonaId: Int
+    ): Perro!
+    updatePerro(
+      id: Int!
+      nombre: String!
+      raza: String!
+      active: Boolean
+    ): Perro!
   }
 `;
 

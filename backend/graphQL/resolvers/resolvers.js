@@ -1,10 +1,22 @@
 const resolvers = {
   Query: {
     async getPersonas(root, args, { models }) {
-      return await models.persona.findAll();
+      return await models.persona.findAll({ where: { active: true } });
     },
     async getPersona(root, args, { models }) {
       return await models.persona.findByPk(args.id);
+    },
+    async getPerros(root, args, { models }) {
+      return await models.perro.findAll({
+        include: [
+          {
+            model: models.persona,
+          },
+        ],
+      });
+    },
+    async getPerro(root, args, { models }) {
+      return await models.perro.findByPk(args.id);
     },
   },
   Mutation: {
@@ -21,6 +33,20 @@ const resolvers = {
         }
       );
       return await models.persona.findByPk(id);
+    },
+    async createPerro(root, { nombre, raza, active, PersonaId }, { models }) {
+      return await models.perro.create({ nombre, raza, active, PersonaId });
+    },
+    async updatePerro(root, { id, nombre, raza, active }, { models }) {
+      await models.perro.update(
+        { id, nombre, raza, active },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      return await models.perro.findByPk(id);
     },
   },
 };
