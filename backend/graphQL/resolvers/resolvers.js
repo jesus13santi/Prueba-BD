@@ -11,6 +11,7 @@ const resolvers = {
         include: [
           {
             model: models.persona,
+            where: { active: true },
           },
         ],
         where: { active: true },
