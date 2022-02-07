@@ -10,13 +10,14 @@ const models = {
   perro: sequelize.import("./perro"),
 };
 
-models.perro.belongsTo(models.persona, {
-  name: "id",
-  field: "id",
-});
+// models.perro.belongsTo(models.persona, {
+//   name: "id",
+//   field: "id",
+// });
 
-// models.perro.belongsTo(models.persona, { foreingKey: "id" });
-// models.persona.hasOne(models.perro, { foreingKey: "id" });
+models.perro.belongsTo(models.persona, { foreingKey: "id" });
+models.persona.hasOne(models.perro, { foreingKey: "id" });
+
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 module.exports = models;

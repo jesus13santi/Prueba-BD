@@ -13,6 +13,7 @@ const resolvers = {
             model: models.persona,
           },
         ],
+        where: { active: true },
       });
     },
     async getPerro(root, args, { models }) {
@@ -37,9 +38,13 @@ const resolvers = {
     async createPerro(root, { nombre, raza, active, PersonaId }, { models }) {
       return await models.perro.create({ nombre, raza, active, PersonaId });
     },
-    async updatePerro(root, { id, nombre, raza, active }, { models }) {
+    async updatePerro(
+      root,
+      { id, nombre, raza, active, PersonaId },
+      { models }
+    ) {
       await models.perro.update(
-        { id, nombre, raza, active },
+        { id, nombre, raza, active, PersonaId },
         {
           where: {
             id: id,

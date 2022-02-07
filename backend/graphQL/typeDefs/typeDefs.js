@@ -12,7 +12,7 @@ const typeDefs = gql`
     nombre: String!
     raza: String!
     active: Boolean!
-    Persona: Persona
+    Persona: Persona!
   }
 
   type Query {
@@ -41,6 +41,7 @@ const typeDefs = gql`
       nombre: String!
       raza: String!
       active: Boolean
+      PersonaId: Int
     ): Perro!
   }
 `;
